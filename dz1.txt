@@ -83,5 +83,5 @@ e)
             return fib(n.subtract(BigInteger.ONE)).add(fib(n.subtract(BigInteger.TWO)));
         }
 
-        O(exp n), здесь нет итераций, 53316291172 вызова fib
+        O( [(1+sqrt(5))/2] ^ n ), здесь нет итераций, 25172538049 вызова fib
 
