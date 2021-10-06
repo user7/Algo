@@ -1,0 +1,87 @@
+1. Прочитать в книге "Грокаем алгоритмы" или в предложенных материалах про алгоритмы и О-большое.
+2. Определить сложность следующих алгоритмов:
+
+-. Поиск элемента массива с известным индексом
+O(1)
+
+-. Дублирование одномерного массива через foreach
+O(n)
+
+-. Удаление элемента массива с известным индексом без сдвига
+O(1) наверное, если замену на null считать удалением
+
+-. Удаление элемента массива с неизвестным индексом без сдвига
+O(n)
+
+-. Удаление элемента массива с неизвестным индексом со сдвига
+O(n)
+.
+
+3. Определить сложность следующих алгоритмов. Сколько произойдет итераций?
+
+a)
+
+        int n = 10000;
+        List<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 1; j < n; j *= 2) {
+                arrayList.add(i * j);
+            }
+        }
+
+        O(n log n), 10000 + 140000 = 150000
+
+b)
+
+        int n = 10000;
+        List<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < n; i += 2) {
+            for (int j = i; j < n; j++) {
+                arrayList.add(i * j);
+            }
+        }
+
+        O(n * n), 5000 + 25005000 = 25010000
+
+с)
+
+        int n = 10000;
+        List<Integer> arrayList = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                arrayList.add(i * j);
+                n--;
+            }
+        }
+
+        O(n), 10 + 9991 = 10001
+
+d)
+
+        factorial(BigInteger.valueOf(10000))
+
+        public static BigInteger factorial(BigInteger n) {
+            if (n.equals(BigInteger.ONE)) {
+                return n;
+            }
+            return n.multiply(factorial(n.subtract(BigInteger.valueOf(1))));
+        }
+
+        O(n), здесь нет итераций, 10000 вызовов factorial
+
+e)
+
+        fib(BigInteger.valueOf(50));
+
+        public static BigInteger fib(BigInteger n) {
+            if (n.equals(BigInteger.ONE)) {
+                return BigInteger.ZERO;
+            }
+            if (n.equals(BigInteger.TWO)) {
+                return BigInteger.ONE;
+            }
+            return fib(n.subtract(BigInteger.ONE)).add(fib(n.subtract(BigInteger.TWO)));
+        }
+
+        O(exp n), здесь нет итераций, 53316291172 вызова fib
+
