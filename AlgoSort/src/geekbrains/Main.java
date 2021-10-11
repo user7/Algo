@@ -10,7 +10,7 @@ public class Main {
     public static void main(String[] args) {
         rng = new Random(12348);
         Laptop[] array = generateRandomLaptops(10000);
-        // testSort("librarySort", array);
+        testSort("librarySort", array);
     }
 
     static void testSort(String name, Laptop[] array) {
@@ -58,5 +58,9 @@ public class Main {
 
     static int randomFromRange(int from, int to, int step) {
         return rng.nextInt((to - from) / step + 1) * step + from;
+    }
+
+    static void librarySort(Laptop[] array) {
+        Arrays.sort(array);
     }
 }
