@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
+import geekbrains.sorts.BubbleSort;
 
 public class Main {
 
@@ -13,6 +14,7 @@ public class Main {
         Laptop[] array = generateRandomLaptops(10000);
         counts = countElements(array);
         testSort("librarySort", array);
+        testSort("bubbleSort", array);
     }
 
     static HashMap<Laptop, Integer> countElements(Laptop[] array) {
@@ -84,5 +86,9 @@ public class Main {
 
     static void librarySort(Laptop[] array) {
         Arrays.sort(array);
+    }
+
+    static void bubbleSort(Laptop[] array) {
+        BubbleSort.sort(array);
     }
 }
