@@ -9,19 +9,21 @@ import java.util.function.Function;
 
 import geekbrains.sorts.BubbleSort;
 import geekbrains.sorts.BucketSort;
+import geekbrains.sorts.QuickSort;
 import geekbrains.sorts.RadixSort;
 
 public class Main {
 
     public static void main(String[] args) {
         rng = new Random(12348);
-        Laptop[] array = generateRandomLaptops(10000);
+        Laptop[] array = generateRandomLaptops(1000000);
         counts = countElements(array);
         testSort("librarySort", array);
-        testSort("bubbleSort", array);
+        //testSort("bubbleSort", array);
         testSort("radixSort", array);
         testSort("packSort", array);
         testSort("bucketSort", array);
+        testSort("quickSort", array);
     }
 
     static HashMap<Laptop, Integer> countElements(Laptop[] array) {
@@ -135,5 +137,9 @@ public class Main {
         BucketSort.sortCopy(array2, array, Laptop::ram, 4, 24, 4);
         BucketSort.sortCopy(array, array2, Laptop::price, 500, 2000, 50);
         System.arraycopy(array2, 0, array, 0, array.length);
+    }
+
+    static void quickSort(Laptop[] array) {
+        QuickSort.qsort(array, 0, array.length - 1);
     }
 }
