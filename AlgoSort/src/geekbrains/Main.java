@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.function.Function;
 
 import geekbrains.sorts.BubbleSort;
+import geekbrains.sorts.BucketSort;
 import geekbrains.sorts.RadixSort;
 
 public class Main {
@@ -20,6 +21,7 @@ public class Main {
         testSort("bubbleSort", array);
         testSort("radixSort", array);
         testSort("packSort", array);
+        testSort("bucketSort", array);
     }
 
     static HashMap<Laptop, Integer> countElements(Laptop[] array) {
@@ -125,5 +127,13 @@ public class Main {
                 }
             }
         }
+    }
+
+    static void bucketSort(Laptop[] array) {
+        Laptop[] array2 = new Laptop[array.length];
+        BucketSort.sortCopy(array, array2, x -> x.brand().ordinal(), 0, 5, 1);
+        BucketSort.sortCopy(array2, array, Laptop::ram, 4, 24, 4);
+        BucketSort.sortCopy(array, array2, Laptop::price, 500, 2000, 50);
+        System.arraycopy(array2, 0, array, 0, array.length);
     }
 }
