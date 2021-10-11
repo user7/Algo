@@ -1,14 +1,10 @@
 package geekbrains;
 
-import geekbrains.sorts.BubbleSort;
-import geekbrains.sorts.RadixSort;
-
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.function.Function;
 
 public class Main {
 
@@ -17,14 +13,11 @@ public class Main {
         Laptop[] array = generateRandomLaptops(10000);
         counts = countElements(array);
         testSort("librarySort", array);
-        testSort("radixSort", array);
-        testSort("packSort", array);
-        testSort("bubbleSort", array);
     }
 
     static HashMap<Laptop, Integer> countElements(Laptop[] array) {
         var m = new HashMap<Laptop, Integer>();
-        for(var a : array) {
+        for (var a : array) {
             m.compute(a, (k, v) -> v == null ? 1 : v + 1);
         }
         return m;
@@ -91,39 +84,5 @@ public class Main {
 
     static void librarySort(Laptop[] array) {
         Arrays.sort(array);
-    }
-
-    static void radixSort(Laptop[] array) {
-        Function<Laptop, Integer> mapper = laptop -> (laptop.price() * 25 + laptop.ram()) * 6 + laptop.brand().ordinal();
-        RadixSort.sort(array, mapper);
-    }
-
-    static void packSort(Laptop[] array) {
-        int[] cnt = new int[30 * 6 * 6 + 5 * 6 + 5 + 1];
-
-        // pack
-        for (int i = 0; i < array.length; ++i) {
-            Laptop e = array[i];
-            cnt[(e.price() - 500) / 50 * 36 + (e.ram() - 4) / 4 * 6 + e.brand().ordinal()]++;
-        }
-
-        // unpack
-        int j = 0;
-        for (int p = 0; p < cnt.length; ++p) {
-            int np = cnt[p];
-            if (np > 0) {
-                Brand brand = Brand.values()[p % 6];
-                int ram = p / 6 % 6 * 4 + 4;
-                int price = p / 36 * 50 + 500;
-                while (np > 0) {
-                    array[j++] = new Laptop(price, ram, brand);
-                    np--;
-                }
-            }
-        }
-    }
-
-    static void bubbleSort(Laptop[] array) {
-        BubbleSort.sort(array);
     }
 }
