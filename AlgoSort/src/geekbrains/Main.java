@@ -19,6 +19,7 @@ public class Main {
         testSort("librarySort", array);
         testSort("bubbleSort", array);
         testSort("radixSort", array);
+        testSort("packSort", array);
     }
 
     static HashMap<Laptop, Integer> countElements(Laptop[] array) {
@@ -99,5 +100,30 @@ public class Main {
     static void radixSort(Laptop[] array) {
         Function<Laptop, Integer> mapper = laptop -> laptop.price() * 36 + laptop.ram() * 6 + laptop.brand().ordinal();
         RadixSort.sort(array, mapper);
+    }
+
+    static void packSort(Laptop[] array) {
+        int[] cnt = new int[30 * 36 + 5 * 6 + 5];
+
+        // pack
+        for (int i = 0; i < array.length; ++i) {
+            Laptop e = array[i];
+            cnt[(e.price() - 500) / 50 * 36 + (e.ram() - 4) / 4 * 6 + e.brand().ordinal()]++;
+        }
+
+        // unpack
+        int j = 0;
+        for (int p = 0; p < cnt.length; ++p) {
+            int np = cnt[p];
+            if (np > 0) {
+                Brand brand = Brand.values()[p % 6];
+                int ram = p / 6 % 6 * 4 + 4;
+                int price = p / 36 * 50 + 500;
+                while (np > 0) {
+                    array[j++] = new Laptop(price, ram, brand);
+                    np--;
+                }
+            }
+        }
     }
 }
