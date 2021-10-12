@@ -16,14 +16,18 @@ public class Main {
 
     public static void main(String[] args) {
         rng = new Random(12348);
-        Laptop[] array = generateRandomLaptops(1000000);
+        Laptop[] array = generateRandomLaptops(10000);
         counts = countElements(array);
         testSort("librarySort", array);
-        //testSort("bubbleSort", array);
+        testSort("bubbleSort", array);
         testSort("radixSort", array);
         testSort("packSort", array);
         testSort("bucketSort", array);
         testSort("quickSort", array);
+        testSort("insertionSort", array);
+        testSort("hybridSort10", array);
+        testSort("hybridSort20", array);
+        testSort("hybridSort40", array);
     }
 
     static HashMap<Laptop, Integer> countElements(Laptop[] array) {
@@ -141,5 +145,21 @@ public class Main {
 
     static void quickSort(Laptop[] array) {
         QuickSort.qsort(array, 0, array.length - 1);
+    }
+
+    static void insertionSort(Laptop[] array) {
+        QuickSort.insertionSort(array, 0, array.length - 1);
+    }
+
+    static void hybridSort10(Laptop[] array) {
+        QuickSort.hybridSort(array, 0, array.length - 1, 10);
+    }
+
+    static void hybridSort20(Laptop[] array) {
+        QuickSort.hybridSort(array, 0, array.length - 1, 20);
+    }
+
+    static void hybridSort40(Laptop[] array) {
+        QuickSort.hybridSort(array, 0, array.length - 1, 40);
     }
 }
